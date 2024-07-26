@@ -10,7 +10,8 @@ const Weather = mongoose.model('Weather',
   {
     city: String, // create table and/or open
     temperature: String,
-    date: String
+    date: String,
+    rain: String
   });
 
 const app = express()
@@ -25,7 +26,7 @@ app.get('/api/weather', async (req, res) => {
   let lang = req.query.lang
   let units = req.query.units
   let date = new Date()
-
+if(lat && lon && lang && units) {
   let resWeather = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&units=${units}&appid=7c871f23791e7e4646bb4bf648aca357`);
   // console.log(resWeather )
   let resWeatherJson = await resWeather.json()
@@ -45,14 +46,17 @@ app.get('/api/weather', async (req, res) => {
   })
   const newWeather = new Weather({ // create report
     'city': resWeatherJson.name,
-    'temperature': resWeatherJson.temp,
+    'temperature': (resWeatherJson.main.temp).toFixed(2) ,
     'date': date,
+    'rain': resWeatherJson.rain?.['1h'],
   })
   //const newWeather = new Weather()   //alternative for create report
   //newWeather.city =  resWeatherJson.name
 
   newWeather.save().then(() => console.log('meow')); //commit
-
+} else {
+  console.log('no data!')
+}
 })
 
 //read
