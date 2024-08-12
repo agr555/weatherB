@@ -1,6 +1,7 @@
 
 console.log('Start')
 let loadButton = document.getElementById('load')
+let logButton = document.getElementById('log')
 
 loadButton.onclick = async () => {
 
@@ -65,5 +66,9 @@ loadButton.onclick = async () => {
     }
 
 }
-
+logButton.onclick = async () => {
+    let result1 = await fetch(`/api/log`);  
+        let resJson1 = await result1.json();
+    console.log(resJson1)
+}
 

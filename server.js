@@ -5,8 +5,15 @@ require('dotenv').config()
 // console.log(process.env.MONGODB_URI)
 
 // mongoose.connect('mongodb://127.0.0.1:27017/weatherdb');//create db or/and connect
-mongoose.connect(process.env.MONGODB_URI);//create db or/and connect
-const Weather1 = mongoose.model('Weather1',
+
+const db = mongoose.createConnection(process.env.MONGODB_URI, {
+  // reconnectInterval: 5000,
+  // reconnectTries: 60
+  // add more config if you need
+});
+
+// mongoose.connect(process.env.MONGODB_URI);//create db or/and connect
+const Weather = mongoose.model('Weather',
   {
     city: String, // create table and/or open
     temperature: String,
@@ -16,12 +23,12 @@ const Weather1 = mongoose.model('Weather1',
     pressure: String
   });
 
-const Okanswer = mongoose.model('Okanswer',
-  {
-    name: String, // create table and/or open
-    phone: String,
-    choice: String,
-  });
+// const Okanswer = mongoose.model('Okanswer',
+//   {
+//     name: String, // create table and/or open
+//     phone: String,
+//     choice: String,
+//   });
 
 const app = express()
 const port = 5000
@@ -56,7 +63,8 @@ app.get('/api/weather1', async (req, res) => {
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
     })
-    const newWeather = new Weather1({ // create report
+    
+    const newWeather = new Weather({ // create report
       'city': resWeatherJson.name,
       'temperature': (resWeatherJson.main.temp).toFixed(2),
       'date': date,
@@ -76,7 +84,7 @@ app.get('/api/weather1', async (req, res) => {
 //read
 app.get('/api/log', async (req, res) => {
 
-  let log = await Weather1.find()
+  let log = await Weather.find()
   res.json(log)
 })
 
@@ -89,7 +97,7 @@ app.get('/api/send', async (req, res) => {
 
 //update
 app.get('/api/log1', async (req, res) => {
-  let log = await Weather1.find() // findOne() // findById(id)
+  let log = await Weather.find() // findOne() // findById(id)
   log[1].city = 'PTZ'
   log[1].save()
 })
@@ -102,3 +110,12 @@ app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}`)
 })
 
+
+
+// const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/test');
+
+const Cat = mongoose.model('Cat', { name: String });
+
+const kitty = new Cat({ name: 'cat' });
+kitty.save().then(() => console.log('meow'));
