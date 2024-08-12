@@ -52,7 +52,7 @@ app.get('/api/weather1', async (req, res) => {
       'weatherdesc': resWeatherJson.weather[0].description,
       'icon': resWeatherJson.weather[0].icon,
       'winddeg': resWeatherJson.wind.deg + '°',
-      'windspeed': resWeatherJson.wind.speed,
+      'windspeed': resWeatherJson.wind.speed + ' m/s',
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
     })

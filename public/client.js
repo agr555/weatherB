@@ -48,7 +48,7 @@ loadButton.onclick = async () => {
         rain.innerText = resJson.rain?resJson.rain:'';
 
         let snow = document.getElementById('snow');  
-        snow.innerText = resJson.rain?resJson.snow:'';
+        snow.innerText = resJson.snow?resJson.snow:'';
 
         status.textContent = "";
     }
