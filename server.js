@@ -71,7 +71,7 @@ app.get('/api/weather1', async (req, res) => {
       'date': date,
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
-      'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'
+      'pressure': (resWeatherJson.main.pressure).toFixed(0)  + ' hPa'
     })
     //const newWeather = new Weather()   //alternative for create report
     //newWeather.city =  resWeatherJson.name
