@@ -5,12 +5,13 @@ require('dotenv').config()
 // console.log(process.env.MONGODB_URI)
 
 // mongoose.connect('mongodb://127.0.0.1:27017/weatherdb');//create db or/and connect
+ mongoose.connect(process.env.MONGODB_URI)
 
-const db = mongoose.createConnection(process.env.MONGODB_URI, {
+// const db = mongoose.createConnection(process.env.MONGODB_URI, {
   // reconnectInterval: 5000,
   // reconnectTries: 60
   // add more config if you need
-});
+// });
 
 // mongoose.connect(process.env.MONGODB_URI);//create db or/and connect
 const Weather = mongoose.model('Weather',
@@ -70,7 +71,7 @@ app.get('/api/weather1', async (req, res) => {
       'date': date,
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
-      'pressure': (resWeatherJson.main.pressure).toFixed(2) + ' hPa'
+      'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'
     })
     //const newWeather = new Weather()   //alternative for create report
     //newWeather.city =  resWeatherJson.name
@@ -83,13 +84,11 @@ app.get('/api/weather1', async (req, res) => {
 
 //read
 app.get('/api/log', async (req, res) => {
-
   let log = await Weather.find()
   res.json(log)
 })
 
 app.get('/api/send', async (req, res) => {
-
   let send = await Okanswer.find()
   res.json(send)
   res.save();
@@ -109,13 +108,3 @@ app.get('/api/log1', async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}`)
 })
-
-
-
-// const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test');
-
-const Cat = mongoose.model('Cat', { name: String });
-
-const kitty = new Cat({ name: 'cat' });
-kitty.save().then(() => console.log('meow'));
