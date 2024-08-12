@@ -80,6 +80,20 @@ app.get('/api/weather1', async (req, res) => {
   } else {
     console.log('no data!')
   }
+
+  app.post('/api/weather1', async (req, res) => {
+    const newWeather = new Weather({ // create report
+      'city': resWeatherJson.name,
+      'temperature': (resWeatherJson.main.temp).toFixed(2),
+      'date': date,
+      'rain': resWeatherJson.rain?.['1h'],
+      'snow': resWeatherJson.snow?.['1h'],
+      'pressure': (resWeatherJson.main.pressure).toFixed(0)  + ' hPa'
+    })
+
+    await newWeather.save().then(() => console.log('save')); //commit
+})
+
 })
 
 //read
