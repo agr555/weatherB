@@ -76,7 +76,17 @@ app.get('/api/weather1', async (req, res) => {
     //const newWeather = new Weather()   //alternative for create report
     //newWeather.city =  resWeatherJson.name
 
-    await newWeather.save().then(() => console.log('I save record')); //commit
+    await newWeather.save().then(() =>
+      
+      {
+        console.log('I save record')
+    
+    app.get('/api/log', async (req, res) => {
+      let log = await Weather.find()
+      res.json(log)
+    })
+  });
+    //commit
   } else {
     console.log('no data!')
   }
