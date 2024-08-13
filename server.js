@@ -5,12 +5,12 @@ require('dotenv').config()
 // console.log(process.env.MONGODB_URI)
 
 // mongoose.connect('mongodb://127.0.0.1:27017/weatherdb');//create db or/and connect
- mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
 
 // const db = mongoose.createConnection(process.env.MONGODB_URI, {
-  // reconnectInterval: 5000,
-  // reconnectTries: 60
-  // add more config if you need
+// reconnectInterval: 5000,
+// reconnectTries: 60
+// add more config if you need
 // });
 
 // mongoose.connect(process.env.MONGODB_URI);//create db or/and connect
@@ -64,36 +64,46 @@ app.get('/api/weather1', async (req, res) => {
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
     })
-    
+
     const newWeather = new Weather({ // create report
       'city': resWeatherJson.name,
       'temperature': (resWeatherJson.main.temp).toFixed(2),
       'date': date,
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
-      'pressure': (resWeatherJson.main.pressure).toFixed(0)  + ' hPa'
+      'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'
     })
     //const newWeather = new Weather()   //alternative for create report
     //newWeather.city =  resWeatherJson.name
 
-   await newWeather.save().then(() => console.log('I save record')); //commit
+    await newWeather.save().then(() => console.log('I save record')); //commit
   } else {
     console.log('no data!')
   }
 
-  app.post('/api/weather1', async (req, res) => {
-    const newWeather = new Weather({ // create report
+  // app.post('/api/weather1', async (req, res) => {
+  //   const newWeather = new Weather({ // create report
+  //     'city': resWeatherJson.name,
+  //     'temperature': (resWeatherJson.main.temp).toFixed(2),
+  //     'date': date,
+  //     'rain': resWeatherJson.rain?.['1h'],
+  //     'snow': resWeatherJson.snow?.['1h'],
+  //     'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'
+  //   })
+  //   await newWeather.save().then(() => console.log('save')); //commit
+  // })
+  
+  app.get('/api/weather1', async (req, res) => {
+    let log = await Weather.insertMany([{
       'city': resWeatherJson.name,
       'temperature': (resWeatherJson.main.temp).toFixed(2),
       'date': date,
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
-      'pressure': (resWeatherJson.main.pressure).toFixed(0)  + ' hPa'
-    })
-
-    await newWeather.save().then(() => console.log('save')); //commit
-})
-
+      'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'}])
+      await log.save().then(() => console.log('save insert')); //commit
+    res.json(log)
+  })
 })
 
 //read
