@@ -12,7 +12,8 @@ async function run() {
       date: String,
       rain: String,
       snow: String,
-      pressure: String
+      pressure: String,
+      browser: String
     });
 
   const app = express()
@@ -27,6 +28,7 @@ async function run() {
     let lang = req.query.lang
     let units = req.query.units
     let date = new Date()
+    let browser = req.query.browser
 
     if (lat && lon && lang && units) {
       let resWeather = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&units=${units}&appid=7c871f23791e7e4646bb4bf648aca357`);
@@ -58,7 +60,8 @@ async function run() {
         'date': date,
         'rain': resWeatherJson.rain?.['1h'],
         'snow': resWeatherJson.snow?.['1h'],
-        'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'
+        'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa',
+        'browser': browser
       })
 
       //const newWeather = new Weather()   //alternative for create report
