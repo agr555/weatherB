@@ -9,6 +9,7 @@ loadButton.onclick = async () => {
         const lat = position.coords.latitude;//53.13; //
         const lon = position.coords.longitude;//4.11;//
         const lang = 'en'
+        const dateNow = Date();
         // const lat = 50.45; //
         // const lon = 1.614852;//
         let result = await fetch(`/api/weather1?lat=${lat}&lon=${lon}&lang=${lang}&units=metric`);  
@@ -50,6 +51,9 @@ loadButton.onclick = async () => {
 
         let snow = document.getElementById('snow');  
         snow.innerText = resJson.snow?resJson.snow:'';
+
+        let date = document.getElementById('date');  
+        date.innerText = dateNow;
 
         status.textContent = "";
     }
