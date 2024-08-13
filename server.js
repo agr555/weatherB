@@ -1,10 +1,10 @@
 const express = require('express')
-
 const mongoose = require('mongoose');
 require('dotenv').config()
+async function run() {
 // console.log(process.env.MONGODB_URI)
 // mongoose.connect('mongodb://127.0.0.1:27017/weatherdb');//create db or/and connect
-mongoose.connect(process.env.MONGODB_URI)
+await mongoose.connect(process.env.MONGODB_URI)
 const Weather = mongoose.model('Weather',
   {
     city: String, // create table and/or open
@@ -169,3 +169,5 @@ app.get('/api/weather1', async (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}`)
 })
+}
+run();
