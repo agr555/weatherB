@@ -70,9 +70,9 @@ loadButton.onclick = async () => {
     }
 
 }
-logButton.onclick = async () => {
-    let result1 = await fetch(`/api/log`);  
-        let resJson1 = await result1.json();
-    console.log(resJson1)
-}
+// logButton.onclick = async () => {
+//     let result1 = await fetch(`/api/log`);  
+//         let resJson1 = await result1.json();
+//     console.log(resJson1)
+// }
 
