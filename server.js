@@ -65,8 +65,7 @@ async function run() {
       //newWeather.city =  resWeatherJson.name
 
       await newWeather.save();
-      
-      //commit
+            //commit
     } else {
       console.log('no data!')
     }

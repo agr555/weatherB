@@ -2,7 +2,7 @@
 .env
 npm.txt
 /etc
-node_modules
+/node_modules
 
 /dist
 /tmp
