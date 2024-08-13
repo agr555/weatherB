@@ -3,17 +3,8 @@ const express = require('express')
 const mongoose = require('mongoose');
 require('dotenv').config()
 // console.log(process.env.MONGODB_URI)
-
 // mongoose.connect('mongodb://127.0.0.1:27017/weatherdb');//create db or/and connect
 mongoose.connect(process.env.MONGODB_URI)
-
-// const db = mongoose.createConnection(process.env.MONGODB_URI, {
-// reconnectInterval: 5000,
-// reconnectTries: 60
-// add more config if you need
-// });
-
-// mongoose.connect(process.env.MONGODB_URI);//create db or/and connect
 const Weather = mongoose.model('Weather',
   {
     city: String, // create table and/or open
@@ -47,7 +38,8 @@ app.get('/api/weather1', async (req, res) => {
     let resWeather = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&units=${units}&appid=7c871f23791e7e4646bb4bf648aca357`);
     // console.log(resWeather )
     let resWeatherJson = await resWeather.json()
-    // console.log(resWeatherJson)
+    console.log(resWeatherJson)
+    // console.log(await resWeather.json())
     res.json({  //после запроса ответ на фронтентенд
       'city': resWeatherJson.name,
       'temp': (resWeatherJson.main.temp).toFixed(2) + '°',
@@ -64,28 +56,67 @@ app.get('/api/weather1', async (req, res) => {
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
     })
-
+    console.log(res)
     const newWeather = new Weather({ // create report
       'city': resWeatherJson.name,
       'temperature': (resWeatherJson.main.temp).toFixed(2),
       'date': date,
       'rain': resWeatherJson.rain?.['1h'],
       'snow': resWeatherJson.snow?.['1h'],
-      'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'
+      'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa0'
     })
+
+
+
     //const newWeather = new Weather()   //alternative for create report
     //newWeather.city =  resWeatherJson.name
 
-    await newWeather.save().then(() =>
+    await newWeather.save();
+    //.then( async () =>
       
-      {
+     // {
         console.log('I save record')
+        console.log(newWeather)
     
-    app.get('/api/log', async (req, res) => {
-      let log = await Weather.find()
-      res.json(log)
-    })
-  });
+    // app.get('/api/log', async (req, res) => {
+    //   let log = await Weather.find()
+    //   res.json(log)
+    //   console.log(log)
+
+    //   let log1 = await Weather.insertOne({
+    //     'city': resWeatherJson.name,
+    //     'temperature': (resWeatherJson.main.temp).toFixed(2),
+    //     'date': date,
+    //     'rain': resWeatherJson.rain?.['1h'],
+    //     'snow': resWeatherJson.snow?.['1h'],
+    //     'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa1'})
+    //     await log1.save().then(() => console.log('save insert')); //commit
+    //   res.json(log1)
+    //   console.log(log1)
+
+    // })
+//   }
+// );
+
+      // let log1 =  Weather.insertMany([{
+      //   'city': resWeatherJson.name,
+      //   'temperature': (resWeatherJson.main.temp).toFixed(2),
+      //   'date': date,
+      //   'rain': resWeatherJson.rain?.['1h'],
+      //   'snow': resWeatherJson.snow?.['1h'],
+      //   'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa1'}],
+      //   (err, result) => {
+      //     if (err) {
+      //         console.log('Unable insert user: ', err);
+      //         throw err;
+      //     }
+      // }
+      
+      // )
+        // await log1.save().then(() => console.log('save insert')); //commit
+      // res.json(log1)
+      // console.log(log1)
+
     //commit
   } else {
     console.log('no data!')
@@ -103,37 +134,37 @@ app.get('/api/weather1', async (req, res) => {
   //   await newWeather.save().then(() => console.log('save')); //commit
   // })
   
-  app.get('/api/weather1', async (req, res) => {
-    let log = await Weather.insertMany([{
-      'city': resWeatherJson.name,
-      'temperature': (resWeatherJson.main.temp).toFixed(2),
-      'date': date,
-      'rain': resWeatherJson.rain?.['1h'],
-      'snow': resWeatherJson.snow?.['1h'],
-      'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'}])
-      await log.save().then(() => console.log('save insert')); //commit
-    res.json(log)
-  })
+  // app.get('/api/weather1', async (req, res) => {
+  //   let log = await Weather.insertMany([{
+  //     'city': resWeatherJson.name,
+  //     'temperature': (resWeatherJson.main.temp).toFixed(2),
+  //     'date': date,
+  //     'rain': resWeatherJson.rain?.['1h'],
+  //     'snow': resWeatherJson.snow?.['1h'],
+  //     'pressure': (resWeatherJson.main.pressure).toFixed(0) + ' hPa'}])
+  //     await log.save().then(() => console.log('save insert')); //commit
+  //   res.json(log)
+  // })
 })
 
 //read
-app.get('/api/log', async (req, res) => {
-  let log = await Weather.find()
-  res.json(log)
-})
+// app.get('/api/log', async (req, res) => {
+//   let log = await Weather.find()
+//   res.json(log)
+// })
 
-app.get('/api/send', async (req, res) => {
-  let send = await Okanswer.find()
-  res.json(send)
-  res.save();
-})
+// app.get('/api/send', async (req, res) => {
+//   let send = await Okanswer.find()
+//   res.json(send)
+//   res.save();
+// })
 
 //update
-app.get('/api/log1', async (req, res) => {
-  let log = await Weather.find() // findOne() // findById(id)
-  log[1].city = 'PTZ'
-  log[1].save()
-})
+// app.get('/api/log1', async (req, res) => {
+//   let log = await Weather.find() // findOne() // findById(id)
+//   log[1].city = 'PTZ'
+//   log[1].save()
+// })
 
 //delete
 // Weather.deleteMany // delete table
