@@ -37,7 +37,7 @@
         "dest": "public/$1"
       },
       {
-        "src": "/(.*)",
+        "src": "/cars/(.+)",
         "dest": "public/dist/$1"
       }
     ]
