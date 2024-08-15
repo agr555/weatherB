@@ -11,6 +11,12 @@
 
     }
 ],
+"rewrites": [
+    {
+      "source": "/cars",
+      "destination": "public/dist"
+    }
+  ],
     "routes": [
       {
         "src": "/redirect",
