@@ -13,6 +13,11 @@
 ],
     "routes": [
       {
+        "src": "/redirect",
+        "status": 308,
+        "headers": { "Location": "https://google.com/" }
+      },
+      {
         "src": "/api/(.*)",
         "dest": "server.js"
       },
@@ -22,12 +27,13 @@
         "dest": "public/index.html"
       },
       {
-        "src": "/cars-app",
-        "dest": "public/dist/index.html"
+        "src": "/cars",
+        "headers": { "cache-control": "s-maxage=1000" },
+        "dest": "/public/dist/index.html"
       },
       {
-        "src": "/(.+)",
-        "dest": "public/$1"
+        "src": "/(.*)",
+        "dest": "public/dist/$1"
       }
     ]
   }
