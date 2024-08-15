@@ -31,22 +31,19 @@
       {
         "src": "/car",
         "headers": { "cache-control": "s-maxage=1000" },
-        "dest": "/public/dist/index.html"
+        "dest": "/public/dist/$1"
       },
       {
         "src": "/weather",
         "headers": { "cache-control": "s-maxage=1000" },
-        "dest": "public/weather/index.html"
+        "dest": "public/weather/$1"
       },
  
        {
-        "src": "/(.)",
+        "src": "/(.+)",
         "dest": "public/$1"
-      },
-      {
-        "src": "/(.cars)",
-        "dest": "public/dist/$1"
       }
+
 
     ]
   }
