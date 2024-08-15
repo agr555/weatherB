@@ -33,7 +33,7 @@
       },
       {
         "src": "/(.+)",
-        "dest": "public/dist/$1"
+        "dest": "public/$1"
       }
     ]
   }
