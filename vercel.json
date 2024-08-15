@@ -29,8 +29,11 @@
       {
         "src": "/cars",
         "headers": { "cache-control": "s-maxage=1000" },
-        "dest": "/public/dist/index.html"
+        "dest": "public/dist/index.html"
+      },
+      {
+        "src": "/(.+)",
+        "dest": "public/$1"
       }
-   
     ]
   }
