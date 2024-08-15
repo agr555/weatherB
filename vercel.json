@@ -29,6 +29,10 @@
         "dest": "public/dist/index.html"
       },
       {
+        "src": "/cars/(.+)",
+        "dest": "public/dist/$1"
+      },
+      {
         "src": "/car",
         "headers": { "cache-control": "s-maxage=1000" },
         "dest": "/public/dist/$1"
