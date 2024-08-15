@@ -22,10 +22,6 @@
         "dest": "public/index.html"
       },
       {
-        "src": "/cars-app",
-        "dest": "public/dist/index.html"
-      },
-      {
         "src": "/(.+)",
         "dest": "public/$1"
       }

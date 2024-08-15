@@ -1,5 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose');
+var cors = require('cors')
+ 
+
+
 require('dotenv').config()
 async function run() {
   // console.log(process.env.MONGODB_URI)
@@ -16,7 +20,16 @@ async function run() {
       browser: String
     });
 
+  const Cars = mongoose.model('Cars',
+    {
+      image: String, // create table and/or open
+      name: String,
+      gear: String,
+      engine: String,
+      places: String,
+    });
   const app = express()
+  app.use(cors())
   const port = 5000
 
   app.use('/', express.static('public'))
@@ -74,7 +87,11 @@ async function run() {
     }
 
   })
-
+  
+  app.get('/api/cars', async (req, res) => {
+    let cars = await Cars.find()
+    res.json(cars)
+  })
   //read
   // app.get('/api/log', async (req, res) => {
   //   let log = await Weather.find()

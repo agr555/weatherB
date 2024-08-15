@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEATHER from API</title>
+    <link rel="stylesheet" href="style-weather.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="square">
+            <button class="load" id="load">Get weather</button>
+            <div class="top">
+                <div id="name"></div>
+                <div class="main">
+                    <img id="icon" src='star-ring-svgrepo-com.svg' alt="star" >      
+                    <div id="temp"></div>
+                </div>
+
+                <!-- <div id="icon">Not found</div> -->
+                <div class="center">
+                    <div id="weatherdesc"></div>
+                    <div id="rain"></div>
+                    <div id="snow"></div>
+
+                </div>
+            </div>
+            <div class="temp">
+                <table>
+                    <tr>
+                        <th>Max°</th>
+                        <th>Min°</th>
+                        <th>
+                            Pressure</th>
+                    </tr>
+                    <tr>
+                        <th class="rows">
+                            <div id="max_temp">-</div>
+                        </th>
+                        
+                        <th class="rows">
+                            <div id="min_temp">-</div>
+                        </th>
+                        
+                        <th class="rows">
+                            <div id="pressure">-</div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Wind</th>
+                        <th>Humidity</th>
+                    </tr>
+                    <tr>
+                        
+                        <th class="rows">
+                            <div id="windspeed">-</div>
+                        </th>
+                        
+                        <th class="rows">
+                            <div id="winddeg">-</div>
+                        </th>
+                        
+                        <th class="rows">
+                            <div id="humidity">-</div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="bottom">
+                <!-- <div class="log" id="log">-</div> -->
+                <div class="date" id="date"></div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="weather.js"></script> -->
+    <script src="client.js"></script>
+</body>
+
+</html>
