@@ -33,8 +33,12 @@
         "dest": "public/index.html"
       },
       {
-        "src": "/(.*)",
+        "src": "/",
         "dest": "public/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "public/dist/$1"
       }
     ]
   }
