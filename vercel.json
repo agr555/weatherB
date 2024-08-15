@@ -29,16 +29,23 @@
         "dest": "public/dist/index.html"
       },
       {
-        "src": "/",
-        "dest": "public/index.html"
+        "src": "/car",
+        "headers": { "cache-control": "s-maxage=1000" },
+        "dest": "/public/dist/index.html"
       },
       {
-        "src": "/",
+        "src": "/weather",
+        "headers": { "cache-control": "s-maxage=1000" },
+        "dest": "public/weather/index.html"
+      },
+ 
+       {
+        "src": "/(.*)",
         "dest": "public/$1"
       },
       {
-        "src": "/cars/(.+)",
-        "dest": "public/dist/$1"
+        "src": "/",
+        "dest": "public/index.html"
       }
     ]
   }
