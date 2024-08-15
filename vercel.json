@@ -21,34 +21,13 @@
         "src": "/api/(.*)",
         "dest": "server.js"
       },
-      
-    
-      {
-        "src": "/cars",
-        "headers": { "cache-control": "s-maxage=1000" },
-        "dest": "public/dist/index.html"
-      },
-      {
-        "src": "/cars/(.+)",
-        "dest": "public/dist/$1"
-      },
-      {
-        "src": "/car",
-        "headers": { "cache-control": "s-maxage=1000" },
-        "dest": "/public/dist/$1"
-      },
-      {
-        "src": "/weather",
-        "headers": { "cache-control": "s-maxage=1000" },
-        "dest": "public/weather/$1"
-      },
       {
         "src": "/",
         "dest": "public/index.html"
       },
        {
         "src": "/(.*)",
-        "dest": "public/dist/$1"
+        "dest": "public/$1"
       }
 
 

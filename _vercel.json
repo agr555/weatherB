@@ -38,3 +38,21 @@
     "src": "/",
     "dest": "public/index.html"
   }
+
+  ======
+  //одинаковык пути для выбора каталога
+  {
+    "src": "/",
+    "dest": "public/index.html"
+  },
+  {
+    "src": "/(.*)",
+    "dest": "public/dist/$1"
+  }
+
+//кеш
+  {
+    "src": "/weather",
+    "headers": { "cache-control": "s-maxage=1000" },
+    "dest": "public/weather/$1"
+  },
