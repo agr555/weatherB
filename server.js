@@ -7,7 +7,7 @@ var cors = require('cors')
 require('dotenv').config()
 async function run() {
   // console.log(process.env.MONGODB_URI)
-  // mongoose.connect('mongodb://127.0.0.1:27017/weatherdb');//create db or/and connect
+  // mongoose.connect('mongodb://127.0.0.1:27017/weatherdb'); //create db or/and connect
   await mongoose.connect(process.env.MONGODB_URI)
   const Weather = mongoose.model('Weather',
     {
@@ -28,12 +28,27 @@ async function run() {
       engine: String,
       places: String,
     });
+
+
+
+    const RequestSchema = new mongoose.Schema({
+      product: String,
+      name: String,
+      phone: String,
+      service: String,
+      date: Date
+  });
+  
+  const RequestModel = mongoose.model('Request', RequestSchema);
   const app = express()
+  
   app.use(cors())
   const port = 5000
-
+  
   app.use('/', express.static('public'))
-
+  
+  //app.use("/api/requests", requestRoutes);
+  
   http://localhost:5000/data?lang=ru&temperature=C&lon=55&lat=44&units=metric
   app.get('/api/weather1', async (req, res) => {
     let lat = req.query.lat
@@ -92,6 +107,12 @@ async function run() {
     let cars = await Cars.find()
     res.json(cars)
   })
+    app.get('/api/send', async (req, res) => {
+    let send = await Okanswer.find()
+    res.json(send)
+    res.save();
+  })
+
   //read
   // app.get('/api/log', async (req, res) => {
   //   let log = await Weather.find()
